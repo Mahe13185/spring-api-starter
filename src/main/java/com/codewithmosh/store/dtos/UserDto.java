@@ -14,12 +14,12 @@ import java.util.Date;
 @Getter
 public class UserDto {
 //    @JsonIgnore
-    @JsonProperty("User_id")
+//    @JsonProperty("User_id")
     private Long id;
     private String name;
     private String email;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String phoneNumber;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdAt;
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    private String phoneNumber;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    private LocalDateTime createdAt;
 }
