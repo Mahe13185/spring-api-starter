@@ -9,15 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/products")
 @AllArgsConstructor
 public class ProductController {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
 
     @GetMapping
     List<ProductDto> findAllProducts(@RequestParam(required = false , defaultValue = "" , name = "categoryId") Byte categoryId) {
@@ -36,11 +33,11 @@ public class ProductController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> findProductById(@PathVariable Long id){
+    public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) {
         var product = productRepository.findById(id).orElse(null);
 
-        if(product == null)
-            return  ResponseEntity.notFound().build();
+        if (product == null)
+            return ResponseEntity.notFound().build();
         else
             return ResponseEntity.ok(productMapper.toDto(product));
     }
