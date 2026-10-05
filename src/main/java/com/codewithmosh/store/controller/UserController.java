@@ -56,6 +56,7 @@ public class UserController {
             @RequestBody UserDtoRequest data){
        var user =  userMapper.todtoRequest(data);
        userRepository.save(user);
+        System.out.println("User created");
 
        var userDto = userMapper.toDtos(user);
         var url = builder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
@@ -73,8 +74,19 @@ public class UserController {
         }
         userMapper.updateUser(request,user);
         userRepository.save(user);
+        System.out.println("user updated");
 
         return ResponseEntity.ok(userMapper.toDtos(user));
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null){
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.delete(user);
+        System.out.println("User with id " + id + " has been deleted");
+        return ResponseEntity.noContent().build();
     }
 }
